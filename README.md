@@ -5,7 +5,7 @@
 
 ---
 
-##Overview
+## Overview
 
 In an emergency, finding the right blood type quickly is hard. Patients don't know which blood banks have stock, and blood banks have no fast way to reach donors when supplies run low.
 
@@ -91,7 +91,7 @@ pdflatex test_cases.tex
 DonorNet/
 ├── README.md
 ├── wireframes.md          # Link to the Figma prototype
-└── test-cases/
+└── Test-cases/
     ├── test_cases.tex     # LaTeX source
     └── test_cases.pdf     # Compiled PDF
 ```
