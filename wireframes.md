@@ -12,4 +12,3 @@
 | Blood Bank | Patient Requests (accept / reject), My Stocks, Request for Blood, Request History |
 | Admin | Dashboard, Approve Patient Signups, Approve Donor Signups, Add a Blood Bank, Search |
 
-> Make sure the Figma file's sharing is set to **"Anyone with the link can view"** so others can open it.
