@@ -3,9 +3,6 @@
 > A blood donation platform that connects **patients**, **donors** and **blood banks**, with **admin** oversight.
 > **This repository contains the UI/UX prototype (Figma wireframes) and the QA test cases. It is not a working app yet.**
 
-[![Figma](https://img.shields.io/badge/Design-Figma-F24E1E?logo=figma&logoColor=white)](https://www.figma.com/design/1xQh4ZnslJlfxPQaSRUvbk/wireframes?node-id=0-1&t=rfybNPnImBz7yMC7-0)
-![Status](https://img.shields.io/badge/status-prototype-orange)
-
 ---
 
 ## 📖 Overview
