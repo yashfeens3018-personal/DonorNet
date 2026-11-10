@@ -1,0 +1,2026 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage[hidelinks]{hyperref}
+
+\renewcommand{\arraystretch}{1.4}
+\setlength{\tabcolsep}{6pt}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\begin{center}
+    {\LARGE \textbf{DonorNet: Test Cases}}\\[0.5em]
+    {\large Manual test cases for Patients, Donors, Blood Banks and Admins}
+\end{center}
+
+\vspace{0.5em}
+
+\section*{How to Use This Document}
+Each test case lists its ID, scenario, steps, test data, expected result and pre-requisite. Fill in the \textbf{Actual Result} and \textbf{Pass/Fail} rows while testing. Passwords are case-sensitive.
+
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{ID Prefix} & \textbf{Area} \\
+\midrule
+P\_SIGNUP, D\_SIGNUP & Patient / Donor sign-up \\
+LOGIN & Login (patient, donor, blood bank) \\
+FP & Forgot password \\
+SD, SBB & Search donors / blood banks \\
+BB\_PREQ & Blood bank: patient requests \\
+BB\_STOCK, BB\_MKREQ & Blood bank: stock and blood requests \\
+ADMIN & Admin \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\tableofcontents
+\newpage
+
+\section{Patient Sign-up}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & P\_SIGNUP\_01 \\
+\hline
+\textbf{Test Scenario} & Successful sign-up as a patient with valid details including a strong password. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Click ``SignUp''. \newline
+3. Select ``Patient'' and then ``Next''. \newline
+4. Fill in valid details (username, email, password, address, phone, city, blood type, proof, and latest CBC). \newline
+5. Enter a password that: \newline
+\hspace*{1em}- Is at least 8 characters long \newline
+\hspace*{1em}- Contains at least 1 special character (e.g., @, \#, \$) \newline
+\hspace*{1em}- Contains at least 1 number (e.g., ``Secure@123'') \newline
+6. Once all details have been filled, click ``SIGNUP!'' to finish. \\
+\hline
+\textbf{Test Data} & Username: Ali Raza \newline
+Email: ali.raza@gmail.com \newline
+Password: Secure@123 \newline
+Address: House 10, Street 5, Karachi \newline
+Phone: 03001234567 \newline
+City: Karachi \newline
+Blood Type: B+ \newline
+Proof Document: CNIC\_AliRaza.pdf \newline
+Latest CBC: CBC\_Report\_AliRaza.pdf \\
+\hline
+\textbf{Expected Result} & Patient account is created successfully and a ``Your request has been sent for approval'' confirmation is shown. The account stays pending until an admin approves it. \\
+\hline
+\textbf{Pre-Requisite} & DonorNet app installed, internet connection active, and patient sign-up form accessible. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & P\_SIGNUP\_02 \\
+\hline
+\textbf{Test Scenario} & Sign-up fails with a weak password. \\
+\hline
+\textbf{Test Steps} & 1. Follow steps 1-4 from P\_SIGNUP\_01. \newline
+2. Enter an invalid password such as ``weak'', ``weakpass'', or ``weakpass1''. \newline
+3. Click ``SIGNUP!'' to finish. \\
+\hline
+\textbf{Test Data} & Username: Sana Ahmed \newline
+Email: sana.ahmed@gmail.com \newline
+Password: weakpass \newline
+Address: Apt 12, Gulberg, Lahore \newline
+Phone: 03111234567 \newline
+City: Lahore \newline
+Blood Type: O- \newline
+Proof Document: CNIC\_SanaAhmed.pdf \newline
+Latest CBC: CBC\_Report\_SanaAhmed.pdf \\
+\hline
+\textbf{Expected Result} & Error message: ``Password must be 8+ characters with at least 1 number and 1 special character.'' \\
+\hline
+\textbf{Pre-Requisite} & DonorNet app installed, internet connection active, and patient sign-up form accessible. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & P\_SIGNUP\_03 \\
+\hline
+\textbf{Test Scenario} & Sign-up fails with missing required fields. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Click ``SignUp''. \newline
+3. Select ``Patient'' and then ``Next''. \newline
+4. Leave one or more mandatory fields (e.g., email, blood type) blank. \newline
+5. Click ``SIGNUP!'' to finish. \\
+\hline
+\textbf{Test Data} & Username: Hamza Khan \newline
+Email: [Blank] \newline
+Password: Hamza@123 \newline
+Address: Block B, Islamabad \newline
+Phone: 03451234567 \newline
+City: Islamabad \newline
+Blood Type: [Blank] \newline
+Proof Document: CNIC\_HamzaKhan.pdf \newline
+Latest CBC: CBC\_Report\_HamzaKhan.pdf \\
+\hline
+\textbf{Expected Result} & Error message: ``Please fill all the required fields.'' \\
+\hline
+\textbf{Pre-Requisite} & DonorNet app installed, internet connection active, and patient sign-up form accessible. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & P\_SIGNUP\_04 \\
+\hline
+\textbf{Test Scenario} & Sign-up fails with an invalid email format. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Click ``SignUp''. \newline
+3. Select ``Patient'' and then ``Next''. \newline
+4. Enter an invalid email (e.g., ``patient@invalid'') in the email field. \newline
+5. Fill in all other fields with valid data. \newline
+6. Click ``SIGNUP!'' to finish. \\
+\hline
+\textbf{Test Data} & Username: Areeba Malik \newline
+Email: patient@invalid \newline
+Password: Areeba@123 \newline
+Address: House 22, Clifton, Karachi \newline
+Phone: 03021234567 \newline
+City: Karachi \newline
+Blood Type: B+ \newline
+Proof Document: CNIC\_AreebaMalik.pdf \newline
+Latest CBC: CBC\_Report\_AreebaMalik.pdf \\
+\hline
+\textbf{Expected Result} & Error message: ``Invalid email format.'' \\
+\hline
+\textbf{Pre-Requisite} & DonorNet app installed, internet connection active, and patient sign-up form accessible. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & P\_SIGNUP\_05A \\
+\hline
+\textbf{Test Scenario} & Sign-up fails with an already registered email. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Click ``SignUp''. \newline
+3. Select ``Patient'' and then ``Next''. \newline
+4. Fill in an email that is already registered. \newline
+5. Fill in valid and unique details in all other fields, including username. \newline
+6. Click ``SIGNUP!'' to finish. \\
+\hline
+\textbf{Test Data} & Username: Bilal01 \newline
+Email: bilal123@gmail.com (already registered) \newline
+Password: Bilal@123 \newline
+Address: 56-A, Gulberg, Lahore \newline
+Phone: 03211234567 \newline
+City: Lahore \newline
+Blood Type: O+ \newline
+Proof Document: CNIC\_BilalAsif.pdf \newline
+Latest CBC: CBC\_Report\_BilalAsif.pdf \\
+\hline
+\textbf{Expected Result} & Error message: ``Email is already registered.'' \\
+\hline
+\textbf{Pre-Requisite} & DonorNet app installed, internet connection active, and patient sign-up form accessible. The email used must already be registered. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & P\_SIGNUP\_05B \\
+\hline
+\textbf{Test Scenario} & Sign-up fails with an already registered username. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Click ``SignUp''. \newline
+3. Select ``Patient'' and then ``Next''. \newline
+4. Fill in a username that is already taken. \newline
+5. Fill in valid and unique details in all other fields, including email. \newline
+6. Click ``SIGNUP!'' to finish. \\
+\hline
+\textbf{Test Data} & Username: Areeba Malik (already registered) \newline
+Email: hira.khan23@gmail.com \newline
+Password: Hira@321 \newline
+Address: 12-C, Model Town, Karachi \newline
+Phone: 03451239876 \newline
+City: Karachi \newline
+Blood Type: B- \newline
+Proof Document: CNIC\_HiraKhan.pdf \newline
+Latest CBC: CBC\_Report\_HiraKhan.pdf \\
+\hline
+\textbf{Expected Result} & Error message: ``Username is already taken.'' \\
+\hline
+\textbf{Pre-Requisite} & DonorNet app installed, internet connection active, and patient sign-up form accessible. The username used must already be registered. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\section{Donor Sign-up}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & D\_SIGNUP\_01 \\
+\hline
+\textbf{Test Scenario} & Successful sign-up as a donor with valid details including a strong password. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Click ``SignUp''. \newline
+3. Select ``Donor'' and then ``Next''. \newline
+4. Fill in valid details (username, email, password, address, phone, city, blood type, proof, and latest CBC). \newline
+5. Enter a password that: \newline
+\hspace*{1em}- Is at least 8 characters long \newline
+\hspace*{1em}- Contains at least 1 special character (e.g., @, \#, \$) \newline
+\hspace*{1em}- Contains at least 1 number (e.g., ``Secure@123'') \newline
+6. Once all details have been filled, click ``SIGNUP!'' to finish. \\
+\hline
+\textbf{Test Data} & Username: ahmed\_donor \newline
+Email: ahmed.raza99@gmail.com \newline
+Password: Secure@123 \newline
+Address: 123-G, DHA Phase 5, Karachi \newline
+Phone: 03001234567 \newline
+City: Karachi \newline
+Blood Type: AB+ \newline
+Proof Document: CNIC\_AhmedRaza.pdf \newline
+Latest CBC: CBC\_AhmedRaza\_April2025.pdf \\
+\hline
+\textbf{Expected Result} & Donor account is created successfully and a ``Your request has been sent for approval'' confirmation is shown. The account stays pending until an admin approves it. \\
+\hline
+\textbf{Pre-Requisite} & DonorNet app installed, internet connection active, and donor sign-up form accessible. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & D\_SIGNUP\_02 \\
+\hline
+\textbf{Test Scenario} & Sign-up fails with a weak password. \\
+\hline
+\textbf{Test Steps} & 1. Follow steps 1-4 from D\_SIGNUP\_01. \newline
+2. Enter an invalid password such as ``weak'', ``weakpass'', or ``weakpass1''. \newline
+3. Click ``SIGNUP!'' to finish. \\
+\hline
+\textbf{Test Data} & Username: zara\_donor \newline
+Email: zara.mir@gmail.com \newline
+Password: weak \newline
+Address: 22/A, North Nazimabad, Karachi \newline
+Phone: 03001112222 \newline
+City: Karachi \newline
+Blood Type: B+ \newline
+Proof Document: CNIC\_ZaraMir.pdf \newline
+Latest CBC: CBC\_ZaraMir\_April2025.pdf \\
+\hline
+\textbf{Expected Result} & Error message: ``Password must be 8+ characters with at least 1 number and 1 special character.'' \\
+\hline
+\textbf{Pre-Requisite} & DonorNet app installed, internet connection active, and donor sign-up form accessible. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & D\_SIGNUP\_03 \\
+\hline
+\textbf{Test Scenario} & Sign-up fails with missing required fields. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Click ``SignUp''. \newline
+3. Select ``Donor'' and then ``Next''. \newline
+4. Leave one or more mandatory fields (e.g., email, blood type) blank. \newline
+5. Click ``SIGNUP!'' to finish. \\
+\hline
+\textbf{Test Data} & Username: ali\_donor \newline
+Email: [Blank] \newline
+Password: Secure\#2025 \newline
+Address: 45-D, DHA Phase 6, Lahore \newline
+Phone: 03456677889 \newline
+City: Lahore \newline
+Blood Type: [Blank] \newline
+Proof Document: CNIC\_Ali.pdf \newline
+Latest CBC: CBC\_Ali\_March2025.pdf \\
+\hline
+\textbf{Expected Result} & Error message: ``Please fill all the required fields.'' \\
+\hline
+\textbf{Pre-Requisite} & DonorNet app installed, internet connection active, and donor sign-up form accessible. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & D\_SIGNUP\_04 \\
+\hline
+\textbf{Test Scenario} & Sign-up fails with an invalid email format. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Click ``SignUp''. \newline
+3. Select ``Donor'' and then ``Next''. \newline
+4. Enter an invalid email (e.g., ``patient@invalid'') in the email field. \newline
+5. Fill in all other fields with valid data. \newline
+6. Click ``SIGNUP!'' to finish. \\
+\hline
+\textbf{Test Data} & Username: ali\_donor \newline
+Email: donor@invalid \newline
+Password: Secure\#2025 \newline
+Address: 45-D, DHA Phase 6, Lahore \newline
+Phone: 03456677889 \newline
+City: Lahore \newline
+Blood Type: A+ \newline
+Proof Document: CNIC\_Ali.pdf \newline
+Latest CBC: CBC\_Ali\_March2025.pdf \\
+\hline
+\textbf{Expected Result} & Error message: ``Invalid email format.'' \\
+\hline
+\textbf{Pre-Requisite} & DonorNet app installed, internet connection active, and donor sign-up form accessible. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & D\_SIGNUP\_05A \\
+\hline
+\textbf{Test Scenario} & Sign-up fails with an already registered email. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Click ``SignUp''. \newline
+3. Select ``Donor'' and then ``Next''. \newline
+4. Fill in an email that is already registered. \newline
+5. Fill in valid and unique details in all other fields, including username. \newline
+6. Click ``SIGNUP!'' to finish. \\
+\hline
+\textbf{Test Data} & Username: ali\_donor\_new (unique) \newline
+Email: ali.donor@gmail.com (already registered) \newline
+Password: Secure\#2025 \newline
+Address: 45-D, DHA Phase 6, Lahore \newline
+Phone: 03456677889 \newline
+City: Lahore \newline
+Blood Type: A+ \newline
+Proof Document: CNIC\_Ali.pdf \newline
+Latest CBC: CBC\_Ali\_March2025.pdf \\
+\hline
+\textbf{Expected Result} & Error message: ``Email is already registered.'' \\
+\hline
+\textbf{Pre-Requisite} & DonorNet app installed, internet connection active, and donor sign-up form accessible. The email used must already be registered. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & D\_SIGNUP\_05B \\
+\hline
+\textbf{Test Scenario} & Sign-up fails with an already registered username. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Click ``SignUp''. \newline
+3. Select ``Donor'' and then ``Next''. \newline
+4. Fill in a username that is already taken. \newline
+5. Fill in valid and unique details in all other fields, including email. \newline
+6. Click ``SIGNUP!'' to finish. \\
+\hline
+\textbf{Test Data} & Username: ali\_donor (already registered) \newline
+Email: new.ali@gmail.com \newline
+Password: Secure\#2025 \newline
+Address: 45-D, DHA Phase 6, Lahore \newline
+Phone: 03456677889 \newline
+City: Lahore \newline
+Blood Type: A+ \newline
+Proof Document: CNIC\_Ali.pdf \newline
+Latest CBC: CBC\_Ali\_March2025.pdf \\
+\hline
+\textbf{Expected Result} & Error message: ``Username is already taken.'' \\
+\hline
+\textbf{Pre-Requisite} & DonorNet app installed, internet connection active, and donor sign-up form accessible. The username used must already be registered. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\section{Login (Patient, Donor and Blood Bank)}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & LOGIN\_01 \\
+\hline
+\textbf{Test Scenario} & Login fails when the password does not match the registered email/username. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Navigate to the Login screen. \newline
+3. Enter a registered email or username. \newline
+4. Enter an incorrect password. \newline
+5. Click ``LOGIN''. \\
+\hline
+\textbf{Test Data} & Email/Username: ali.raza@gmail.com \newline
+Password: wrongpass123 \\
+\hline
+\textbf{Expected Result} & Error message: ``Invalid credentials. Please try again.'' \\
+\hline
+\textbf{Pre-Requisite} & The email/username exists in the system. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & LOGIN\_02 \\
+\hline
+\textbf{Test Scenario} & Login fails when the email/username is not registered. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Navigate to the Login screen. \newline
+3. Enter an unregistered email or username. \newline
+4. Enter any password. \newline
+5. Click ``LOGIN''. \\
+\hline
+\textbf{Test Data} & Email/Username: fakeuser@gmail.com \newline
+Password: anypass123 \\
+\hline
+\textbf{Expected Result} & Error message: ``Invalid credentials. Please try again.'' \\
+\hline
+\textbf{Pre-Requisite} & The email/username does not exist in the system. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & LOGIN\_03 \\
+\hline
+\textbf{Test Scenario} & Successful patient login with email and password. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Navigate to the Login screen. \newline
+3. Enter a registered patient email. \newline
+4. Enter the correct password (passwords are case-sensitive). \newline
+5. Click ``LOGIN''. \\
+\hline
+\textbf{Test Data} & Email: ali.raza@gmail.com \newline
+Password: Secure@123 \\
+\hline
+\textbf{Expected Result} & User is redirected to the Patient home screen. \\
+\hline
+\textbf{Pre-Requisite} & Patient account is registered and approved by an admin. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & LOGIN\_04 \\
+\hline
+\textbf{Test Scenario} & Successful patient login with username and password. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Navigate to the Login screen. \newline
+3. Enter a registered patient username. \newline
+4. Enter the correct password. \newline
+5. Click ``LOGIN''. \\
+\hline
+\textbf{Test Data} & Username: Ali Raza \newline
+Password: Secure@123 \\
+\hline
+\textbf{Expected Result} & User is redirected to the Patient home screen. \\
+\hline
+\textbf{Pre-Requisite} & Patient account is registered and approved by an admin. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & LOGIN\_05 \\
+\hline
+\textbf{Test Scenario} & Successful donor login. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Navigate to the Login screen. \newline
+3. Enter a registered donor email or username. \newline
+4. Enter the correct password. \newline
+5. Click ``LOGIN''. \\
+\hline
+\textbf{Test Data} & Email: ahmed.raza99@gmail.com \newline
+Password: Secure@123 \\
+\hline
+\textbf{Expected Result} & User is redirected to the Donor home screen. \\
+\hline
+\textbf{Pre-Requisite} & Donor account is registered and approved by an admin. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & LOGIN\_06 \\
+\hline
+\textbf{Test Scenario} & Successful blood bank login. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Navigate to the Login screen. \newline
+3. Enter the blood bank email created by the admin. \newline
+4. Enter the correct password. \newline
+5. Click ``LOGIN''. \\
+\hline
+\textbf{Test Data} & Email: citybloodbank@example.com \newline
+Password: bloodbank@123 \\
+\hline
+\textbf{Expected Result} & User is redirected to the Blood Bank home screen (Patient Requests, My Stocks, etc.). \\
+\hline
+\textbf{Pre-Requisite} & Blood bank account has been created by an admin. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & LOGIN\_07 \\
+\hline
+\textbf{Test Scenario} & Login fails when required fields are empty. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Navigate to the Login screen. \newline
+3. Leave the email/username field, the password field, or both blank. \newline
+4. Click ``LOGIN''. \\
+\hline
+\textbf{Test Data} & Case 1: Email/Username: [Blank], Password: abc123 \newline
+Case 2: Email/Username: ali.raza@gmail.com, Password: [Blank] \newline
+Case 3: Email/Username: [Blank], Password: [Blank] \\
+\hline
+\textbf{Expected Result} & Error message: ``Please fill all the required fields.'' \\
+\hline
+\textbf{Pre-Requisite} & No user is logged in. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & LOGIN\_08 \\
+\hline
+\textbf{Test Scenario} & Login with an account that is still pending admin approval. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Navigate to the Login screen. \newline
+3. Enter the email of a newly registered account that has not been approved yet. \newline
+4. Enter the correct password. \newline
+5. Click ``LOGIN''. \\
+\hline
+\textbf{Test Data} & Email: ali.raza@gmail.com (pending) \newline
+Password: Secure@123 \\
+\hline
+\textbf{Expected Result} & User is not taken to the home screen and is informed that the account is awaiting admin approval. \\
+\hline
+\textbf{Pre-Requisite} & Account was registered but has not yet been approved or declined by an admin. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\section{Forgot Password}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & FP\_01 \\
+\hline
+\textbf{Test Scenario} & User clicks ``Forgot Password?'' (checks that the button works). \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Navigate to the Login screen. \newline
+3. Click ``Forgot Password?''. \\
+\hline
+\textbf{Test Data} & Not applicable. \\
+\hline
+\textbf{Expected Result} & User is redirected to the Password Reset Request screen. \\
+\hline
+\textbf{Pre-Requisite} & DonorNet app installed. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & FP\_02 \\
+\hline
+\textbf{Test Scenario} & Request a password reset OTP with a registered email. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Navigate to the Login screen. \newline
+3. Click ``Forgot Password?''. \newline
+4. Enter a valid registered email. \newline
+5. Click ``REQUEST OTP''. \\
+\hline
+\textbf{Test Data} & Email: ali.raza@gmail.com \\
+\hline
+\textbf{Expected Result} & Success message: ``Password reset OTP sent to your email.'' \\
+\hline
+\textbf{Pre-Requisite} & DonorNet app installed and the ``Forgot Password?'' button works. The email is registered. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & FP\_03 \\
+\hline
+\textbf{Test Scenario} & Request a password reset OTP with an unregistered email. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Navigate to the Login screen. \newline
+3. Click ``Forgot Password?''. \newline
+4. Enter an unregistered email. \newline
+5. Click ``REQUEST OTP''. \\
+\hline
+\textbf{Test Data} & Email: userunknown@gmail.com \\
+\hline
+\textbf{Expected Result} & Error message: ``This email is not registered.'' \\
+\hline
+\textbf{Pre-Requisite} & DonorNet app installed and the ``Forgot Password?'' button works. The email does not exist in the system. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & FP\_04 \\
+\hline
+\textbf{Test Scenario} & Request a password reset OTP with an invalid email format. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Navigate to the Login screen. \newline
+3. Click ``Forgot Password?''. \newline
+4. Enter an email in an invalid format (e.g., ``user@@gmail'', ``user.com'', ``@user.com''). \newline
+5. Click ``REQUEST OTP''. \\
+\hline
+\textbf{Test Data} & Email: user@@gmail \\
+\hline
+\textbf{Expected Result} & Error message: ``Please enter a valid email address.'' \\
+\hline
+\textbf{Pre-Requisite} & DonorNet app installed and the ``Forgot Password?'' button works. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & FP\_05 \\
+\hline
+\textbf{Test Scenario} & Request a password reset OTP with a blank email field. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Navigate to the Login screen. \newline
+3. Click ``Forgot Password?''. \newline
+4. Leave the email field blank. \newline
+5. Click ``REQUEST OTP''. \\
+\hline
+\textbf{Test Data} & Email: [Blank] \\
+\hline
+\textbf{Expected Result} & Error message: ``Email is required.'' \\
+\hline
+\textbf{Pre-Requisite} & DonorNet app installed and the ``Forgot Password?'' button works. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & FP\_06 \\
+\hline
+\textbf{Test Scenario} & Reset the password using a valid OTP and a strong new password. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Navigate to the Login screen. \newline
+3. Click ``Forgot Password?''. \newline
+4. Enter a registered email and click ``REQUEST OTP''. \newline
+5. Enter the OTP received by email. \newline
+6. Enter a new password that meets the password rules. \newline
+7. Confirm the password and submit. \\
+\hline
+\textbf{Test Data} & Email: ali.raza@gmail.com \newline
+OTP: 458201 (as received) \newline
+New Password: Secure@2025 \newline
+Confirm Password: Secure@2025 \\
+\hline
+\textbf{Expected Result} & Success message: ``Password updated successfully.'' User can then log in with the new password. \\
+\hline
+\textbf{Pre-Requisite} & DonorNet app installed and the ``Forgot Password?'' button works. A valid OTP has been received by email. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & FP\_07 \\
+\hline
+\textbf{Test Scenario} & Password reset fails with an incorrect or expired OTP. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Navigate to the Login screen. \newline
+3. Click ``Forgot Password?''. \newline
+4. Enter a registered email and click ``REQUEST OTP''. \newline
+5. Enter an incorrect OTP. \newline
+6. Enter a new password and confirm it. \newline
+7. Submit. \\
+\hline
+\textbf{Test Data} & Email: ali.raza@gmail.com \newline
+OTP: 000000 (incorrect) \newline
+New Password: Secure@2025 \newline
+Confirm Password: Secure@2025 \\
+\hline
+\textbf{Expected Result} & Error message: ``Invalid or expired OTP.'' Password is not changed. \\
+\hline
+\textbf{Pre-Requisite} & DonorNet app installed and the ``Forgot Password?'' button works. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & FP\_08 \\
+\hline
+\textbf{Test Scenario} & Password reset fails when the new and confirm passwords do not match. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Navigate to the Login screen. \newline
+3. Click ``Forgot Password?''. \newline
+4. Enter a registered email and click ``REQUEST OTP''. \newline
+5. Enter the correct OTP. \newline
+6. Enter a new password and a different confirmation password. \newline
+7. Submit. \\
+\hline
+\textbf{Test Data} & Email: ali.raza@gmail.com \newline
+OTP: 458201 (as received) \newline
+New Password: Secure@2025 \newline
+Confirm Password: Secure@2026 \\
+\hline
+\textbf{Expected Result} & Error message: ``Passwords do not match.'' Password is not changed. \\
+\hline
+\textbf{Pre-Requisite} & DonorNet app installed and the ``Forgot Password?'' button works. A valid OTP has been received by email. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\section{Searching and Filtering Donors (Patient)}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & SD\_01 \\
+\hline
+\textbf{Test Scenario} & Successful search for a donor by username. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Navigate to the ``Browse Donors'' section. \newline
+3. Enter the username of an existing donor. \newline
+4. Click ``Search''. \\
+\hline
+\textbf{Test Data} & Username: ahmed\_donor \\
+\hline
+\textbf{Expected Result} & The donor matching the username appears in the results. \\
+\hline
+\textbf{Pre-Requisite} & Patient has signed up, been approved, and logged into the DonorNet app. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & SD\_02 \\
+\hline
+\textbf{Test Scenario} & No results message when no donor matches the search term. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Navigate to the ``Browse Donors'' section. \newline
+3. Enter a username that does not exist. \newline
+4. Click ``Search''. \\
+\hline
+\textbf{Test Data} & Username: ghost\_donor (non-existing) \\
+\hline
+\textbf{Expected Result} & Message appears: ``No results found.'' \\
+\hline
+\textbf{Pre-Requisite} & Patient has signed up, been approved, and logged into the DonorNet app. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & SD\_03 \\
+\hline
+\textbf{Test Scenario} & Filter donors by availability. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Navigate to the ``Browse Donors'' section. \newline
+3. Filter the results by ``Availability Status''. \newline
+4. Click ``Apply Filter''. \\
+\hline
+\textbf{Test Data} & Availability Status: Available only \\
+\hline
+\textbf{Expected Result} & Only donors who are currently available are listed. \\
+\hline
+\textbf{Pre-Requisite} & Patient has signed up, been approved, and logged into the DonorNet app. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & SD\_04 \\
+\hline
+\textbf{Test Scenario} & Filter donors by blood type. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Navigate to the ``Browse Donors'' section. \newline
+3. Filter the results by ``Blood Type''. \newline
+4. Select a blood type. \newline
+5. Click ``Apply Filter''. \\
+\hline
+\textbf{Test Data} & Blood Type: B- \\
+\hline
+\textbf{Expected Result} & Only donors with blood type B- are listed. \\
+\hline
+\textbf{Pre-Requisite} & Patient has signed up, been approved, and logged into the DonorNet app. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & SD\_05 \\
+\hline
+\textbf{Test Scenario} & Filter donors by distance. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Navigate to the ``Browse Donors'' section. \newline
+3. Filter the results by ``Distance''. \newline
+4. Select a range (e.g., within 10 km). \newline
+5. Click ``Apply Filter''. \\
+\hline
+\textbf{Test Data} & Distance: 10 km \\
+\hline
+\textbf{Expected Result} & Only donors located within the selected distance are displayed. \\
+\hline
+\textbf{Pre-Requisite} & Patient has signed up, been approved, and logged into the DonorNet app. Location services are enabled. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & SD\_06 \\
+\hline
+\textbf{Test Scenario} & Filter donors by location (city/area). \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Navigate to the ``Browse Donors'' section. \newline
+3. Filter the results by ``Location''. \newline
+4. Enter a city or neighborhood. \newline
+5. Click ``Apply Filter''. \\
+\hline
+\textbf{Test Data} & Location: Lahore \\
+\hline
+\textbf{Expected Result} & Only donors in the specified location are listed. \\
+\hline
+\textbf{Pre-Requisite} & Patient has signed up, been approved, and logged into the DonorNet app. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\section{Searching and Filtering Blood Banks (Patient and Donor)}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & SBB\_01 \\
+\hline
+\textbf{Test Scenario} & Successful search for a blood bank by name. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Navigate to the ``Browse Blood Banks'' section. \newline
+3. Enter the name of an existing blood bank. \newline
+4. Click ``Search''. \\
+\hline
+\textbf{Test Data} & Blood Bank Name: Abbasi Shaheed \\
+\hline
+\textbf{Expected Result} & The blood bank matching the name appears in the results. \\
+\hline
+\textbf{Pre-Requisite} & Patient or donor has signed up, been approved, and logged into the DonorNet app. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & SBB\_02 \\
+\hline
+\textbf{Test Scenario} & No results message when no blood bank matches the search term. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Navigate to the ``Browse Blood Banks'' section. \newline
+3. Enter a blood bank name that does not exist. \newline
+4. Click ``Search''. \\
+\hline
+\textbf{Test Data} & Blood Bank Name: XYZ Blood Bank (non-existing) \\
+\hline
+\textbf{Expected Result} & Message appears: ``No results found.'' \\
+\hline
+\textbf{Pre-Requisite} & Patient or donor has signed up, been approved, and logged into the DonorNet app. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & SBB\_03 \\
+\hline
+\textbf{Test Scenario} & Filter blood banks by availability. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Navigate to the ``Browse Blood Banks'' section. \newline
+3. Filter the results by ``Availability Status''. \newline
+4. Click ``Apply Filter''. \\
+\hline
+\textbf{Test Data} & Availability Status: Available only \\
+\hline
+\textbf{Expected Result} & Only blood banks that are currently available are listed. \\
+\hline
+\textbf{Pre-Requisite} & Patient or donor has signed up, been approved, and logged into the DonorNet app. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & SBB\_04 \\
+\hline
+\textbf{Test Scenario} & Filter blood banks by blood type. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Navigate to the ``Browse Blood Banks'' section. \newline
+3. Filter the results by ``Blood Type''. \newline
+4. Select a blood type. \newline
+5. Click ``Apply Filter''. \\
+\hline
+\textbf{Test Data} & Blood Type: B- \\
+\hline
+\textbf{Expected Result} & Only blood banks with B- in stock are listed. \\
+\hline
+\textbf{Pre-Requisite} & Patient or donor has signed up, been approved, and logged into the DonorNet app. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & SBB\_05 \\
+\hline
+\textbf{Test Scenario} & Filter blood banks by distance. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Navigate to the ``Browse Blood Banks'' section. \newline
+3. Filter the results by ``Distance''. \newline
+4. Select a range (e.g., within 10 km). \newline
+5. Click ``Apply Filter''. \\
+\hline
+\textbf{Test Data} & Distance: 10 km \\
+\hline
+\textbf{Expected Result} & Only blood banks located within the selected distance are displayed. \\
+\hline
+\textbf{Pre-Requisite} & Patient or donor has signed up, been approved, and logged into the DonorNet app. Location services are enabled. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & SBB\_06 \\
+\hline
+\textbf{Test Scenario} & Filter blood banks by location (city/area). \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Navigate to the ``Browse Blood Banks'' section. \newline
+3. Filter the results by ``Location''. \newline
+4. Enter a city or neighborhood. \newline
+5. Click ``Apply Filter''. \\
+\hline
+\textbf{Test Data} & Location: Lahore \\
+\hline
+\textbf{Expected Result} & Only blood banks in the specified location are listed. \\
+\hline
+\textbf{Pre-Requisite} & Patient or donor has signed up, been approved, and logged into the DonorNet app. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\section{Blood Bank: Accepting and Rejecting Patient Requests}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & BB\_PREQ\_01 \\
+\hline
+\textbf{Test Scenario} & View the list of patient requests. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Log in as a blood bank. \newline
+3. Navigate to ``Patient Requests''. \newline
+4. Click ``View More''. \\
+\hline
+\textbf{Test Data} & Not applicable. \\
+\hline
+\textbf{Expected Result} & A list of requests appears with requester name, date, urgency, blood type, and Accept/Reject buttons. \\
+\hline
+\textbf{Pre-Requisite} & Blood bank account exists and is logged in. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & BB\_PREQ\_02 \\
+\hline
+\textbf{Test Scenario} & Click ``ACCEPT'' on a request and see the confirmation pop-up. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Log in as a blood bank. \newline
+3. Navigate to ``Patient Requests''. \newline
+4. Click ``ACCEPT'' on a request. \\
+\hline
+\textbf{Test Data} & Request: Ahmed Ansari \newline
+Blood Type: O+ \newline
+Urgency: Low \\
+\hline
+\textbf{Expected Result} & Pop-up appears: ``Processing request: Once accepted, the blood units will be deducted from inventory. Continue?'' \\
+\hline
+\textbf{Pre-Requisite} & Blood bank account exists and is logged in, and the request is visible in the list. Inventory has enough O+ units. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & BB\_PREQ\_03 \\
+\hline
+\textbf{Test Scenario} & Confirm acceptance of a request. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Log in as a blood bank. \newline
+3. Navigate to ``Patient Requests''. \newline
+4. Click ``ACCEPT'' on a request. \newline
+5. Click ``Continue'' on the pop-up. \\
+\hline
+\textbf{Test Data} & Request: Ahmed Ansari \\
+\hline
+\textbf{Expected Result} & Request is marked as accepted and the blood units are deducted from the inventory. \\
+\hline
+\textbf{Pre-Requisite} & Blood bank account exists and is logged in, and the request is visible in the list. Inventory has enough blood. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & BB\_PREQ\_04 \\
+\hline
+\textbf{Test Scenario} & Cancel acceptance of a request. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Log in as a blood bank. \newline
+3. Navigate to ``Patient Requests''. \newline
+4. Click ``ACCEPT'' on a request. \newline
+5. Click ``Cancel'' on the pop-up. \\
+\hline
+\textbf{Test Data} & Request: Ahmed Ansari \\
+\hline
+\textbf{Expected Result} & Pop-up closes, no action is taken, and inventory is unchanged. \\
+\hline
+\textbf{Pre-Requisite} & Blood bank account exists and is logged in, and the request is visible in the list. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & BB\_PREQ\_05 \\
+\hline
+\textbf{Test Scenario} & Click ``REJECT'' on a request and see the confirmation pop-up. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Log in as a blood bank. \newline
+3. Navigate to ``Patient Requests''. \newline
+4. Click ``REJECT'' on a request. \\
+\hline
+\textbf{Test Data} & Request: Villa e Zehra \newline
+Blood Type: AB- \newline
+Urgency: High \\
+\hline
+\textbf{Expected Result} & Pop-up appears: ``Rejecting this request will notify the requester. Do you still want to continue?'' \\
+\hline
+\textbf{Pre-Requisite} & Blood bank account exists and is logged in, and the request is visible in the list. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & BB\_PREQ\_06 \\
+\hline
+\textbf{Test Scenario} & Confirm rejection of a request. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Log in as a blood bank. \newline
+3. Navigate to ``Patient Requests''. \newline
+4. Click ``REJECT'' on a request. \newline
+5. Click ``Continue'' on the pop-up. \\
+\hline
+\textbf{Test Data} & Request: Villa e Zehra \\
+\hline
+\textbf{Expected Result} & Request is marked as rejected and the requester is notified. \\
+\hline
+\textbf{Pre-Requisite} & Blood bank account exists and is logged in, and the request is visible in the list. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & BB\_PREQ\_07 \\
+\hline
+\textbf{Test Scenario} & Cancel rejection of a request. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Log in as a blood bank. \newline
+3. Navigate to ``Patient Requests''. \newline
+4. Click ``REJECT'' on a request. \newline
+5. Click ``Cancel'' on the pop-up. \\
+\hline
+\textbf{Test Data} & Request: Villa e Zehra \\
+\hline
+\textbf{Expected Result} & Pop-up closes and no action is taken. \\
+\hline
+\textbf{Pre-Requisite} & Blood bank account exists and is logged in, and the request is visible in the list. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\section{Blood Bank: Managing Stock and Making Blood Requests}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & BB\_STOCK\_01 \\
+\hline
+\textbf{Test Scenario} & Edit blood stock data. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Log in as a blood bank. \newline
+3. Navigate to ``My Stocks''. \newline
+4. Click ``EDIT''. \newline
+5. Change the stock of a blood type. \newline
+6. Save the changes. \\
+\hline
+\textbf{Test Data} & Blood Type: B- \newline
+Original Stock: 5 units \newline
+Updated Stock: 3 units \\
+\hline
+\textbf{Expected Result} & Stock for B- is updated to 3 units and ``My Stocks'' shows the new value. \\
+\hline
+\textbf{Pre-Requisite} & Blood bank is logged in and internet connection is active. Blood stock data is available. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & BB\_MKREQ\_01 \\
+\hline
+\textbf{Test Scenario} & Successful blood request by a blood bank. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Log in as a blood bank. \newline
+3. Navigate to the ``Request for Blood'' section. \newline
+4. Select the blood types needed. \newline
+5. Set the urgency level. \newline
+6. Specify the time frame. \newline
+7. Select the venue. \newline
+8. Click ``Send Request for Blood''. \\
+\hline
+\textbf{Test Data} & Blood Types: B-, AB- \newline
+Urgency: High \newline
+Time Frame: 12 hours \newline
+Venue: Hussaini Blood Bank Emergency Unit \\
+\hline
+\textbf{Expected Result} & - Confirmation message: ``Notification sent to donors successfully!'' \newline
+- Request appears in ``See Request History''. \\
+\hline
+\textbf{Pre-Requisite} & Blood bank is logged in and internet connection is active. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & BB\_MKREQ\_02 \\
+\hline
+\textbf{Test Scenario} & Blood request fails when mandatory fields are missing. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Log in as a blood bank. \newline
+3. Navigate to the ``Request for Blood'' section. \newline
+4. Leave a mandatory field (e.g., blood type) blank. \newline
+5. Click ``Send Request for Blood''. \\
+\hline
+\textbf{Test Data} & Blood Types: [Blank] \newline
+Urgency: High \newline
+Time Frame: 12 hours \newline
+Venue: Hussaini Blood Bank Emergency Unit \\
+\hline
+\textbf{Expected Result} & - Error message: ``Please fill all the required fields.'' \newline
+- Request is not created or sent. \\
+\hline
+\textbf{Pre-Requisite} & Blood bank is logged in and internet connection is active. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & BB\_MKREQ\_03 \\
+\hline
+\textbf{Test Scenario} & Blood request shows a low-stock warning. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Log in as a blood bank. \newline
+3. Navigate to ``My Stocks'' and confirm the stock of B- is low. \newline
+4. Go to ``Request for Blood''. \newline
+5. Select blood type B- and set urgency to High. \newline
+6. Click ``Send Request for Blood''. \\
+\hline
+\textbf{Test Data} & Blood Type: B- \newline
+Urgency: High \newline
+Time Frame: 12 hours \newline
+Venue: Hussaini Blood Bank Emergency Unit \\
+\hline
+\textbf{Expected Result} & - Warning message: ``Stocks for B- are critically low. Urgently needed.'' \newline
+- After proceeding, confirmation message: ``Notification sent to donors successfully!'' \newline
+- Request appears in ``See Request History''. \\
+\hline
+\textbf{Pre-Requisite} & Blood bank is logged in and internet connection is active. Stock of B- is low (e.g., 5 units). \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & BB\_MKREQ\_04 \\
+\hline
+\textbf{Test Scenario} & Cancel a blood request before submission. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Log in as a blood bank. \newline
+3. Navigate to the ``Request for Blood'' section. \newline
+4. Fill in the request details. \newline
+5. Click ``Back'' instead of ``Send Request for Blood''. \\
+\hline
+\textbf{Test Data} & Blood Type: B- \newline
+Urgency: High \newline
+Time Frame: 12 hours \newline
+Venue: Hussaini Blood Bank Emergency Unit \\
+\hline
+\textbf{Expected Result} & - Request is not submitted. \newline
+- User is navigated back to the previous screen. \newline
+- No entry appears in ``See Request History''. \\
+\hline
+\textbf{Pre-Requisite} & Blood bank is logged in and internet connection is active. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & BB\_MKREQ\_05 \\
+\hline
+\textbf{Test Scenario} & Blood request fails with an invalid time frame. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Log in as a blood bank. \newline
+3. Navigate to the ``Request for Blood'' section. \newline
+4. Select a blood type. \newline
+5. Set an invalid time frame (e.g., 0 hours). \newline
+6. Click ``Send Request for Blood''. \\
+\hline
+\textbf{Test Data} & Blood Type: AB- \newline
+Urgency: Low \newline
+Time Frame: 0 hours (invalid) \newline
+Venue: Hussaini Blood Bank Emergency Unit \\
+\hline
+\textbf{Expected Result} & - Error message: ``Time frame must be greater than 0 hours.'' \newline
+- Request is not submitted. \\
+\hline
+\textbf{Pre-Requisite} & Blood bank is logged in and internet connection is active. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & BB\_MKREQ\_06 \\
+\hline
+\textbf{Test Scenario} & Verify request history after a successful blood request. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Log in as a blood bank. \newline
+3. Navigate to the ``Request for Blood'' section. \newline
+4. Create a blood request. \newline
+5. Navigate to ``See Request History''. \newline
+6. Check the list for the new request. \\
+\hline
+\textbf{Test Data} & Blood Type: B- \newline
+Urgency: High \newline
+Time Frame: 12 hours \newline
+Venue: Hussaini Blood Bank Emergency Unit \\
+\hline
+\textbf{Expected Result} & The new request is listed with blood type, urgency, date, and status. \\
+\hline
+\textbf{Pre-Requisite} & Blood bank is logged in and internet connection is active. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & BB\_MKREQ\_07 \\
+\hline
+\textbf{Test Scenario} & Blood request with multiple blood types. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Log in as a blood bank. \newline
+3. Navigate to the ``Request for Blood'' section. \newline
+4. Select multiple blood types. \newline
+5. Set the urgency. \newline
+6. Click ``Send Request for Blood''. \\
+\hline
+\textbf{Test Data} & Blood Types: A+, O+ \newline
+Urgency: Low \newline
+Time Frame: 24 hours \newline
+Venue: Hussaini Blood Bank Emergency Unit \\
+\hline
+\textbf{Expected Result} & - Confirmation message: ``Notification sent to donors successfully!'' \newline
+- Requests for both A+ and O+ are logged in ``See Request History''. \\
+\hline
+\textbf{Pre-Requisite} & Blood bank is logged in and internet connection is active. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\section{Admin}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & ADMIN\_LOGIN\_01 \\
+\hline
+\textbf{Test Scenario} & Admin logs in successfully with valid credentials. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Navigate to the Login screen. \newline
+3. Enter a valid admin email. \newline
+4. Enter the valid password. \newline
+5. Click ``LOGIN''. \\
+\hline
+\textbf{Test Data} & Email: admin@example.com \newline
+Password: password@123 \\
+\hline
+\textbf{Expected Result} & Admin is redirected to the admin home screen with options such as ``Approve Patient Signups'' and ``Approve Donor Signups''. \\
+\hline
+\textbf{Pre-Requisite} & DonorNet app installed, internet connection active, and admin credentials available. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & ADMIN\_LOGIN\_02 \\
+\hline
+\textbf{Test Scenario} & Admin login fails with invalid credentials. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Navigate to the Login screen. \newline
+3. Enter an invalid email. \newline
+4. Enter an invalid password. \newline
+5. Click ``LOGIN''. \\
+\hline
+\textbf{Test Data} & Email: wrongadmin@example.com \newline
+Password: wrongpassword \\
+\hline
+\textbf{Expected Result} & Error message: ``Invalid credentials. Please try again.'' \\
+\hline
+\textbf{Pre-Requisite} & DonorNet app installed and internet connection active. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & ADMIN\_APPROVE\_PATIENT\_01 \\
+\hline
+\textbf{Test Scenario} & Admin approves a patient sign-up request. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Log in as an admin. \newline
+3. Navigate to ``Approve Patient Signups''. \newline
+4. Click on a patient’s name. \newline
+5. Review the patient details. \newline
+6. Click ``APPROVE''. \\
+\hline
+\textbf{Test Data} & Patient Name: Fatima Ali \newline
+Email: fatimaali@example.com \newline
+CNIC: 123-250-10861-0 \newline
+Gender: Female \newline
+Phone Number: 0312-7085421 \newline
+Blood Group: B- \\
+\hline
+\textbf{Expected Result} & - Confirmation message: ``Patient approved successfully.'' \newline
+- Patient’s status is updated to ``Approved''. \newline
+- Patient can now log in. \\
+\hline
+\textbf{Pre-Requisite} & DonorNet app installed, internet connection active, and admin logged in. At least one patient sign-up request is pending. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & ADMIN\_DECLINE\_PATIENT\_01 \\
+\hline
+\textbf{Test Scenario} & Admin declines a patient sign-up request. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Log in as an admin. \newline
+3. Navigate to ``Approve Patient Signups''. \newline
+4. Click on a patient’s name. \newline
+5. Review the patient details. \newline
+6. Click ``DECLINE''. \\
+\hline
+\textbf{Test Data} & Patient Name: Fatima Ali \newline
+Email: fatimaali@example.com \newline
+CNIC: 123-250-10861-0 \newline
+Gender: Female \newline
+Phone Number: 0312-7085421 \newline
+Blood Group: B- \\
+\hline
+\textbf{Expected Result} & - Patient’s sign-up request is removed from the list. \newline
+- Patient is notified (if applicable). \newline
+- Patient cannot log in. \\
+\hline
+\textbf{Pre-Requisite} & DonorNet app installed, internet connection active, and admin logged in. At least one patient sign-up request is pending. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & ADMIN\_APPROVE\_DONOR\_01 \\
+\hline
+\textbf{Test Scenario} & Admin approves a donor sign-up request. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Log in as an admin. \newline
+3. Navigate to ``Approve Donor Signups''. \newline
+4. Click on a donor’s name. \newline
+5. Review the donor details. \newline
+6. Click ``APPROVE''. \\
+\hline
+\textbf{Test Data} & Donor Name: Zaid Ahmed \newline
+Email: zaidahmed@example.com \\
+\hline
+\textbf{Expected Result} & - Confirmation message: ``Donor approved successfully.'' \newline
+- Donor’s status is updated to ``Approved''. \newline
+- Donor can now log in. \\
+\hline
+\textbf{Pre-Requisite} & DonorNet app installed, internet connection active, and admin logged in. At least one donor sign-up request is pending. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & ADMIN\_DECLINE\_DONOR\_01 \\
+\hline
+\textbf{Test Scenario} & Admin declines a donor sign-up request. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Log in as an admin. \newline
+3. Navigate to ``Approve Donor Signups''. \newline
+4. Click on a donor’s name. \newline
+5. Review the donor details. \newline
+6. Click ``DECLINE''. \\
+\hline
+\textbf{Test Data} & Donor Name: Zaid Ahmed \newline
+Email: zaidahmed@example.com \\
+\hline
+\textbf{Expected Result} & - Donor’s sign-up request is removed from the list. \newline
+- Donor is notified (if applicable). \newline
+- Donor cannot log in. \\
+\hline
+\textbf{Pre-Requisite} & DonorNet app installed, internet connection active, and admin logged in. At least one donor sign-up request is pending. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & ADMIN\_ADD\_BB\_01 \\
+\hline
+\textbf{Test Scenario} & Admin adds a new blood bank with all valid details. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Log in as an admin. \newline
+3. Navigate to the ``Add a Blood Bank'' section. \newline
+4. Fill in the required fields (Name, Email, Phone Number, Address, City, Operating Hours, Admin In-charge, Password). \newline
+5. Click ``ADD''. \\
+\hline
+\textbf{Test Data} & Name: City Blood Bank \newline
+Email: citybloodbank@example.com \newline
+Phone Number: 0312-3456789 \newline
+Address: 123 Main St, Karachi \newline
+City: Karachi \newline
+Operating Hours: 9 AM - 5 PM \newline
+Admin In-charge: Dr. Ahmed \newline
+Password: bloodbank@123 \\
+\hline
+\textbf{Expected Result} & - Blood bank record is created. \newline
+- Confirmation message: ``Blood Bank created successfully.'' \newline
+- Blood bank appears in the Blood Bank listing. \newline
+- Blood bank can log in with the given email and password. \\
+\hline
+\textbf{Pre-Requisite} & DonorNet app installed, internet connection active, and admin logged in. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & ADMIN\_ADD\_BB\_02 \\
+\hline
+\textbf{Test Scenario} & Adding a blood bank fails when a mandatory field is missing. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Log in as an admin. \newline
+3. Navigate to the ``Add a Blood Bank'' section. \newline
+4. Leave the ``Name'' field empty. \newline
+5. Fill in all other fields. \newline
+6. Click ``ADD''. \\
+\hline
+\textbf{Test Data} & Name: [Blank] \newline
+Email: citybloodbank@example.com \newline
+Phone Number: 0312-3456789 \newline
+Address: 123 Main St, Karachi \newline
+City: Karachi \newline
+Operating Hours: 9 AM - 5 PM \newline
+Admin In-charge: Dr. Ahmed \newline
+Password: bloodbank@123 \\
+\hline
+\textbf{Expected Result} & - Error message: ``Name is required.'' \newline
+- Blood bank is not added. \\
+\hline
+\textbf{Pre-Requisite} & DonorNet app installed, internet connection active, and admin logged in. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & ADMIN\_ADD\_BB\_03 \\
+\hline
+\textbf{Test Scenario} & Adding a blood bank fails when the name or email already exists. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Log in as an admin. \newline
+3. Navigate to the ``Add a Blood Bank'' section. \newline
+4. Fill in the form with a name/email that is already registered. \newline
+5. Click ``ADD''. \\
+\hline
+\textbf{Test Data} & Name: City Blood Bank \newline
+Email: citybloodbank@example.com \newline
+Phone Number: 0312-3456789 \newline
+Address: 123 Main St, Karachi \newline
+City: Karachi \newline
+Operating Hours: 9 AM - 5 PM \newline
+Admin In-charge: Dr. Ahmed \newline
+Password: bloodbank@123 \\
+\hline
+\textbf{Expected Result} & - Error message: ``Blood Bank with this name/email already exists.'' \newline
+- Duplicate record is not added. \\
+\hline
+\textbf{Pre-Requisite} & DonorNet app installed, internet connection active, and admin logged in. A blood bank with the same name/email already exists. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & ADMIN\_ADD\_BB\_04 \\
+\hline
+\textbf{Test Scenario} & Adding a blood bank fails with an invalid email or phone number. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Log in as an admin. \newline
+3. Navigate to the ``Add a Blood Bank'' section. \newline
+4. Enter an invalid email and an invalid phone number. \newline
+5. Fill in the remaining fields with valid data. \newline
+6. Click ``ADD''. \\
+\hline
+\textbf{Test Data} & Name: City Blood Bank \newline
+Email: bloodbank@invalid (invalid) \newline
+Phone Number: 0312-ABCDE (invalid) \newline
+Address: 123 Main St, Karachi \newline
+City: Karachi \newline
+Operating Hours: 9 AM - 5 PM \newline
+Admin In-charge: Dr. Ahmed \newline
+Password: bloodbank@123 \\
+\hline
+\textbf{Expected Result} & - Error message: ``Please enter a valid email/phone number.'' \newline
+- Blood bank is not added. \\
+\hline
+\textbf{Pre-Requisite} & DonorNet app installed, internet connection active, and admin logged in. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & ADMIN\_DASH\_01 \\
+\hline
+\textbf{Test Scenario} & Admin views the dashboard. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Log in as an admin. \newline
+3. Navigate to ``View Admin Dashboard''. \newline
+4. Verify that the dashboard displays relevant data. \\
+\hline
+\textbf{Test Data} & Not applicable. \\
+\hline
+\textbf{Expected Result} & Dashboard loads successfully and displays accurate data (e.g., total sign-ups, blood banks). \\
+\hline
+\textbf{Pre-Requisite} & DonorNet app installed, internet connection active, and admin logged in. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.2\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Test Case ID} & ADMIN\_SEARCH\_01 \\
+\hline
+\textbf{Test Scenario} & Admin searches for a patient or donor sign-up request. \\
+\hline
+\textbf{Test Steps} & 1. Open the DonorNet app. \newline
+2. Log in as an admin. \newline
+3. On the admin home screen, enter a name in the search bar. \newline
+4. Press the search button/icon. \\
+\hline
+\textbf{Test Data} & Search Query: Fatima \\
+\hline
+\textbf{Expected Result} & Search results display all matching entries (e.g., ``Fatima Ali'' under ``Approve Patient Signups''). \\
+\hline
+\textbf{Pre-Requisite} & DonorNet app installed, internet connection active, and admin logged in. Sign-up requests are available. \\
+\hline
+\textbf{Actual Result} &  \\
+\hline
+\textbf{Pass/Fail} &  \\
+\hline
+\end{tabularx}
+\vspace{1em}
+
+\end{document}
