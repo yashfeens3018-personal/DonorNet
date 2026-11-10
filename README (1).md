@@ -90,12 +90,10 @@ pdflatex test_cases.tex
 ```
 DonorNet/
 ├── README.md
-├── LICENSE
-└── docs/
-    ├── wireframes.md          # Link to the Figma prototype
-    └── test-cases/
-        ├── test_cases.tex     # LaTeX source
-        └── test_cases.pdf     # Compiled PDF
+├── wireframes.md          # Link to the Figma prototype
+└── test-cases/
+    ├── test_cases.tex     # LaTeX source
+    └── test_cases.pdf     # Compiled PDF
 ```
 
 ## 🛠️ Tools Used
@@ -113,14 +111,3 @@ DonorNet/
 - [ ] Location services for distance-based search
 - [ ] Testing and deployment
 
-## 👥 Team
-
-<!-- TODO: replace with your names -->
-| Name | Role |
-|------|------|
-| Your Name | UI/UX Design |
-| Teammate | Test Cases / Documentation |
-
-## 📄 License
-
-MIT License. See [LICENSE](LICENSE). Change this if your course or team requires something else.
