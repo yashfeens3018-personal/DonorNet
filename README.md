@@ -5,22 +5,22 @@
 
 ---
 
-## 📖 Overview
+##Overview
 
 In an emergency, finding the right blood type quickly is hard. Patients don't know which blood banks have stock, and blood banks have no fast way to reach donors when supplies run low.
 
 **DonorNet** is a mobile app concept that solves this by bringing four kinds of users onto one platform. Every patient and donor account is **verified before approval**: users upload a proof document (e.g. CNIC) and a recent CBC (Complete Blood Count) report at sign-up, and an admin reviews the account.
 
-## 👥 User Roles
+## User Roles
 
 | Role | What they do |
 |------|--------------|
-| 🧑‍⚕️ **Patient** | Signs up with proof and CBC report, waits for admin approval, then searches for donors and blood banks and sends blood requests. |
-| 🩸 **Donor** | Signs up with blood type and CBC report, waits for admin approval, browses blood banks, and receives notifications when blood is urgently needed. |
-| 🏥 **Blood Bank** | Manages its blood stock, accepts or rejects patient requests, and sends blood requests out to donors when stock runs low. Accounts are created by the admin. |
-| 🛡️ **Admin** | Approves or declines patient and donor sign-ups, adds new blood banks, and monitors the platform through a dashboard. |
+|  **Patient** | Signs up with proof and CBC report, waits for admin approval, then searches for donors and blood banks and sends blood requests. |
+| **Donor** | Signs up with blood type and CBC report, waits for admin approval, browses blood banks, and receives notifications when blood is urgently needed. |
+| **Blood Bank** | Manages its blood stock, accepts or rejects patient requests, and sends blood requests out to donors when stock runs low. Accounts are created by the admin. |
+|  **Admin** | Approves or declines patient and donor sign-ups, adds new blood banks, and monitors the platform through a dashboard. |
 
-## ✨ Features (Designed)
+## Features (Designed)
 
 ### Authentication (all roles)
 - Splash screen and login with email or username
@@ -53,13 +53,13 @@ In an emergency, finding the right blood type quickly is hard. Patients don't kn
 - **Admin Dashboard** with charts and tables
 - Search across sign-up requests
 
-## 🎨 Wireframes
+## Wireframes
 
 The entire front end was designed as a wireframe/prototype in Figma, with separate flows for each role.
 
 🔗 **[Open the Figma prototype](https://www.figma.com/design/1xQh4ZnslJlfxPQaSRUvbk/wireframes?node-id=0-1&t=rfybNPnImBz7yMC7-0)** (also saved in [`docs/wireframes.md`](docs/wireframes.md))
 
-## ✅ Test Cases
+## Test Cases
 
 Manual test cases were written for the main flows of all four roles. Each case includes an ID, scenario, steps, test data, expected result and pre-requisites, with blank "Actual Result" and "Pass/Fail" columns to fill in during testing.
 
@@ -74,7 +74,7 @@ Manual test cases were written for the main flows of all four roles. Each case i
 | Making blood requests | Blood Bank |
 | Admin login, sign-up approvals, add blood bank, dashboard, search | Admin |
 
-📄 **Files:**
+ **Files:**
 - [`docs/test-cases/test_cases.pdf`](docs/test-cases/test_cases.pdf): ready to read
 - [`docs/test-cases/test_cases.tex`](docs/test-cases/test_cases.tex): LaTeX source
 
@@ -85,7 +85,7 @@ cd docs/test-cases
 pdflatex test_cases.tex
 ```
 
-## 🗂️ Repository Structure
+## Repository Structure
 
 ```
 DonorNet/
@@ -96,12 +96,12 @@ DonorNet/
     └── test_cases.pdf     # Compiled PDF
 ```
 
-## 🛠️ Tools Used
+## Tools Used
 
 - **Figma:** wireframing and prototyping
 - **LaTeX:** test case documentation
 
-## 🚧 Project Status & Roadmap
+## Project Status & Roadmap
 
 - [x] UI wireframes / prototype in Figma for all four roles
 - [x] Test cases for the main flows
